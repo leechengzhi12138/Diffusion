@@ -20,7 +20,7 @@ model.eval
 diffusion = GaussianDiffusion(model=model, image_size=32, channels=1, timesteps=1000, beta_schedule="linear", device=device)
 
 # 3. 定义不同采样步数
-sampling_steps = [1000, 500, 250]  # 原始步数 + 两种加速方案
+sampling_steps = [1000, 500, 250]  
 batch_size = 4
 
 output_dir = os.path.join(os.path.dirname(__file__), "outputs")
@@ -31,4 +31,5 @@ for steps in sampling_steps:
     samples = diffusion.ddpm_sample(batch_size=batch_size, sample_steps=steps)
     save_path = os.path.join(output_dir, f"generated_{steps}.png")
     save_image(samples, save_path, nrow=2)
+
     print(f"图片已保存到 {save_path}")
